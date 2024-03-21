@@ -233,6 +233,14 @@ Release Process
       <https://help.github.com/en/github/administering-a-repository/creating-releases>`_
 
 
+#. Check for Docker Images in the Container Registry
+
+    - CI should automatically update relevant docker images and publish them to 
+      the github container reigstry (GHCR). 
+      ghcr.io/cyclus/cyclus_20.04_apt/cyclus:latest
+    
+    - Maually check that these files are correct.
+
 #. Update Conda-forge
 
     - For each project, find the corresponding feedstock repository in the
