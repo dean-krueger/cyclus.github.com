@@ -61,7 +61,7 @@ stored and the input/output commodity names.
 .. note::
     Sometimes you may wish to include numeric values in your state variable definitions,
     such as a default value or range of possible values.  Cyclus provides a set of constants
-    that might be of use, see :ref:`constants` for more information.
+    that might be of use, see :ref:`documentation on standard constants <constants>` for more information.
 
 Build and Install the Modified Module
 ---------------------------------------
