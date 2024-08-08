@@ -50,6 +50,25 @@ the ``cyclus`` package is in your Python path:
   my_small_value = CY_NEAR_ZERO
   ...
 
+This holds true for |Cyclus| input files: 
+
+.. code-block:: python
+
+  from cyclus.system import CY_LARGE_DOUBLE
+  SIMULATION = { 'simulation': 
+    ...
+    'facility': [
+      { 'config': 
+        { 'Source': 
+          { 'capacity': CY_LARGE_DOUBLE,
+    ...
+
+
+.. warning::
+  Only input files written in Python can access the constants in this way, since the variables are evaluated
+  prior to schema validation.  Any attempt to use them in an XML input file will likely fail schema validation since
+  they will be evaluated as strings instead of the corresponding values in C++/Python.
+
 Using constants with the Cyclus Preprocessor
 --------------------------------------------
 
