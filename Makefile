@@ -64,6 +64,7 @@ gh-preview html:
 	wget -nv https://raw.githubusercontent.com/${CYCAMORE_GIT_FORK}/cycamore/${CYCAMORE_GIT_BRANCH}/DEPENDENCIES.rst -O source/user/CYCAMORE_DEPS.rst || \
 		curl https://raw.githubusercontent.com/${CYCAMORE_GIT_FORK}/cycamore/${CYCAMORE_GIT_BRANCH}/DEPENDENCIES.rst -L -o source/user/CYCAMORE_DEPS.rst
 
+	python3 source/releases.py
 	PYTHONDONTWRITEBYTECODE="TRUE" $(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)
 	sed -i.bak 's/function top_offset([$$]node){ return [$$]node\[0\].getBoundingClientRect().top; }/function top_offset($$node){ return (typeof $$node[0] === "undefined") ? 0 : $$node[0].getBoundingClientRect().top; }/' ./gh-build/_static/cloud.js
 	sed -i.bak 's/  if (state == "collapsed"){/  if (typeof state === "undefined") {\n	var state = "uncollapsed";\n  };\n  if (state == "collapsed"){/' ./gh-build/_static/cloud.js
