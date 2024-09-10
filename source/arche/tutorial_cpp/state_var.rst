@@ -38,7 +38,7 @@ stored and the input/output commodity names.
       "doc": "Minimum amount of time material must be stored", \
       "tooltip": "Minimum amount of time material must be stored", \
       "units": "months", \
-      "uilabel": "Storage Time" \ 
+      "uilabel": "Storage Time" \
     }
     int storage_time;
 
@@ -57,6 +57,11 @@ stored and the input/output commodity names.
      "uitype": "outcommodity", \
     }
     std::string outcommod;
+
+.. note::
+    Sometimes you may wish to include numeric values in your state variable definitions,
+    such as a default value or range of possible values.  Cyclus provides a set of constants
+    that might be of use, see :ref:`documentation on standard constants <constants>` for more information.
 
 Build and Install the Modified Module
 ---------------------------------------
@@ -78,33 +83,33 @@ to define your module.  It is missing the new variables.  Try it:
 .. code-block:: console
 
     $ cyclus -v 2 input/storage.xml
-                  :                                                               
-              .CL:CC CC             _Q     _Q  _Q_Q    _Q    _Q              _Q   
-            CC;CCCCCCCC:C;         /_\)   /_\)/_/\\)  /_\)  /_\)            /_\)  
+                  :
+              .CL:CC CC             _Q     _Q  _Q_Q    _Q    _Q              _Q
+            CC;CCCCCCCC:C;         /_\)   /_\)/_/\\)  /_\)  /_\)            /_\)
             CCCCCCCCCCCCCl       __O|/O___O|/O_OO|/O__O|/O__O|/O____________O|/O__
          CCCCCCf     iCCCLCC     /////////////////////////////////////////////////
-         iCCCt  ;;;;;.  CCCC                                                      
-        CCCC  ;;;;;;;;;. CClL.                          c                         
-       CCCC ,;;       ;;: CCCC  ;                   : CCCCi                       
-        CCC ;;         ;;  CC   ;;:                CCC`   `C;                     
-      lCCC ;;              CCCC  ;;;:             :CC .;;. C;   ;    :   ;  :;;   
-      CCCC ;.              CCCC    ;;;,           CC ;    ; Ci  ;    :   ;  :  ;  
-       iCC :;               CC       ;;;,        ;C ;       CC  ;    :   ; .      
-      CCCi ;;               CCC        ;;;.      .C ;       tf  ;    :   ;  ;.    
-      CCC  ;;               CCC          ;;;;;;; fC :       lC  ;    :   ;    ;:  
-       iCf ;;               CC         :;;:      tC ;       CC  ;    :   ;     ;  
-      fCCC :;              LCCf      ;;;:         LC :.  ,: C   ;    ;   ; ;   ;  
-      CCCC  ;;             CCCC    ;;;:           CCi `;;` CC.  ;;;; :;.;.  ; ,;  
-        CCl ;;             CC    ;;;;              CCC    CCL                     
-       tCCC  ;;        ;; CCCL  ;;;                  tCCCCC.                      
-        CCCC  ;;     :;; CCCCf  ;                     ,L                          
-         lCCC   ;;;;;;  CCCL                                                      
-         CCCCCC  :;;  fCCCCC                                                      
-          . CCCC     CCCC .                                                       
-           .CCCCCCCCCCCCCi                                                        
-              iCCCCCLCf                                                           
-               .  C. ,                                                            
-                  :                                                               
+         iCCCt  ;;;;;.  CCCC
+        CCCC  ;;;;;;;;;. CClL.                          c
+       CCCC ,;;       ;;: CCCC  ;                   : CCCCi
+        CCC ;;         ;;  CC   ;;:                CCC`   `C;
+      lCCC ;;              CCCC  ;;;:             :CC .;;. C;   ;    :   ;  :;;
+      CCCC ;.              CCCC    ;;;,           CC ;    ; Ci  ;    :   ;  :  ;
+       iCC :;               CC       ;;;,        ;C ;       CC  ;    :   ; .
+      CCCi ;;               CCC        ;;;.      .C ;       tf  ;    :   ;  ;.
+      CCC  ;;               CCC          ;;;;;;; fC :       lC  ;    :   ;    ;:
+       iCf ;;               CC         :;;:      tC ;       CC  ;    :   ;     ;
+      fCCC :;              LCCf      ;;;:         LC :.  ,: C   ;    ;   ; ;   ;
+      CCCC  ;;             CCCC    ;;;:           CCi `;;` CC.  ;;;; :;.;.  ; ,;
+        CCl ;;             CC    ;;;;              CCC    CCL
+       tCCC  ;;        ;; CCCL  ;;;                  tCCCCC.
+        CCCC  ;;     :;; CCCCf  ;                     ,L
+         lCCC   ;;;;;;  CCCL
+         CCCCCC  :;;  fCCCCC
+          . CCCC     CCCC .
+           .CCCCCCCCCCCCCi
+              iCCCCCLCf
+               .  C. ,
+                  :
     Entity: line 17: element Storage: Relax-NG validity error : Expecting an element throughput, got nothing
     Entity: line 17: element Storage: Relax-NG validity error : Invalid sequence in interleave
     Entity: line 17: element Storage: Relax-NG validity error : Element Storage failed to validate content
@@ -155,33 +160,33 @@ Now we can try it again:
 .. code-block:: console
 
     $ cyclus -v 2 input/storage.xml
-                  :                                                               
-              .CL:CC CC             _Q     _Q  _Q_Q    _Q    _Q              _Q   
-            CC;CCCCCCCC:C;         /_\)   /_\)/_/\\)  /_\)  /_\)            /_\)  
+                  :
+              .CL:CC CC             _Q     _Q  _Q_Q    _Q    _Q              _Q
+            CC;CCCCCCCC:C;         /_\)   /_\)/_/\\)  /_\)  /_\)            /_\)
             CCCCCCCCCCCCCl       __O|/O___O|/O_OO|/O__O|/O__O|/O____________O|/O__
          CCCCCCf     iCCCLCC     /////////////////////////////////////////////////
-         iCCCt  ;;;;;.  CCCC                                                      
-        CCCC  ;;;;;;;;;. CClL.                          c                         
-       CCCC ,;;       ;;: CCCC  ;                   : CCCCi                       
-        CCC ;;         ;;  CC   ;;:                CCC`   `C;                     
-      lCCC ;;              CCCC  ;;;:             :CC .;;. C;   ;    :   ;  :;;   
-      CCCC ;.              CCCC    ;;;,           CC ;    ; Ci  ;    :   ;  :  ;  
-       iCC :;               CC       ;;;,        ;C ;       CC  ;    :   ; .      
-      CCCi ;;               CCC        ;;;.      .C ;       tf  ;    :   ;  ;.    
-      CCC  ;;               CCC          ;;;;;;; fC :       lC  ;    :   ;    ;:  
-       iCf ;;               CC         :;;:      tC ;       CC  ;    :   ;     ;  
-      fCCC :;              LCCf      ;;;:         LC :.  ,: C   ;    ;   ; ;   ;  
-      CCCC  ;;             CCCC    ;;;:           CCi `;;` CC.  ;;;; :;.;.  ; ,;  
-        CCl ;;             CC    ;;;;              CCC    CCL                     
-       tCCC  ;;        ;; CCCL  ;;;                  tCCCCC.                      
-        CCCC  ;;     :;; CCCCf  ;                     ,L                          
-         lCCC   ;;;;;;  CCCL                                                      
-         CCCCCC  :;;  fCCCCC                                                      
-          . CCCC     CCCC .                                                       
-           .CCCCCCCCCCCCCi                                                        
-              iCCCCCLCf                                                           
-               .  C. ,                                                            
-                  :                                                               
+         iCCCt  ;;;;;.  CCCC
+        CCCC  ;;;;;;;;;. CClL.                          c
+       CCCC ,;;       ;;: CCCC  ;                   : CCCCi
+        CCC ;;         ;;  CC   ;;:                CCC`   `C;
+      lCCC ;;              CCCC  ;;;:             :CC .;;. C;   ;    :   ;  :;;
+      CCCC ;.              CCCC    ;;;,           CC ;    ; Ci  ;    :   ;  :  ;
+       iCC :;               CC       ;;;,        ;C ;       CC  ;    :   ; .
+      CCCi ;;               CCC        ;;;.      .C ;       tf  ;    :   ;  ;.
+      CCC  ;;               CCC          ;;;;;;; fC :       lC  ;    :   ;    ;:
+       iCf ;;               CC         :;;:      tC ;       CC  ;    :   ;     ;
+      fCCC :;              LCCf      ;;;:         LC :.  ,: C   ;    ;   ; ;   ;
+      CCCC  ;;             CCCC    ;;;:           CCi `;;` CC.  ;;;; :;.;.  ; ,;
+        CCl ;;             CC    ;;;;              CCC    CCL
+       tCCC  ;;        ;; CCCL  ;;;                  tCCCCC.
+        CCCC  ;;     :;; CCCCf  ;                     ,L
+         lCCC   ;;;;;;  CCCL
+         CCCCCC  :;;  fCCCCC
+          . CCCC     CCCC .
+           .CCCCCCCCCCCCCi
+              iCCCCCLCf
+               .  C. ,
+                  :
     INFO1(core  ):Simulation set to run from start=0 to end=10
     INFO1(core  ):Beginning simulation
     INFO1(tutori):Hello

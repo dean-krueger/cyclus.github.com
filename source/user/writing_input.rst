@@ -115,12 +115,16 @@ contains all data for a simulation.
     # dictionary with a single "simulation" key.
     simulation = {"simulation": {...}}
 
-    # Alternitavely, the simualtion variable can also be a Python function or
+    # Alternatively, the simulation variable can also be a Python function or
     # callable that returns a simulation dictionary. This function should not
     # take any arguments.
     def simulation():
         return {"simulation": {...}}
 
+.. note::
+  Some :ref:`constants <constants>` are provided by |Cyclus| and can be leveraged in Python input files.
+  Keep them in mind when defining near-zero values, or very large integer/double values.  This
+  can help keep your simulation within the constraints of the program and avoid runtime errors.
 
 Although not all sections are required, the following sections may appear in
 any order in the input file:
