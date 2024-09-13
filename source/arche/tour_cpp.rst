@@ -1,8 +1,11 @@
 A Tour of Cycstub
 =================
 
+Since |Cyclus| version 1.3.1 the Cycstub CLI is included in a standard |Cyclus| installation.
+If you have an older version of |Cyclus| please refer to the `Cycstub repository <https://github.com/cyclus/cycstub>`_
+for installation instructions.
 This section will walk through the source files of the stub :term:`archetypes
-<archetype>` in `Cycstub <https://github.com/cyclus/cycstub>`_. Cycstub provides
+<archetype>` in Cycstub. Cycstub provides
 three stub archetypes:
 
 * ``StubFacility``
@@ -10,28 +13,7 @@ three stub archetypes:
 * ``StubRegion``
 
 We will walk through ``StubFacility``\ 's source specifically because its the
-most complicated of the three. Before we begin, though, let's get a fresh copy
-of Cycstub (or follow along on the `website
-<https://github.com/cyclus/cycstub>`_).
-
-**Getting cycstub via git:**
-
-.. code-block:: bash
-
-    $ git clone https://github.com/cyclus/cycstub.git
-    $ cd cycstub
-
-**Getting cycstub via zip:**
-
-.. code-block:: bash
-
-    $ curl -L https://api.github.com/repos/cyclus/cycstub/zipball > cycstub.zip
-    $ unzip cycstub.zip
-    $ mv cyclus-cycstub-* cycstub
-    $ cd cycstub
-
-Feel free to ``rm`` the cycstub directory when we're done (you can always get it
-back!).
+most complicated of the three. 
 
 StubFacility
 ------------
