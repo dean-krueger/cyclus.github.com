@@ -9,21 +9,19 @@ yet supported, please let us know and we'll get to it as soon as possible!
 
 **Description of fields:**
 
-:id: enum identifier (value) for database type in the ``cyclus::DbTypes`` enum.
-:name: enum name for database type in the ``cyclus::DbTypes`` enum.
-:C++ type: the cooresponding C++ type.
-:shape rank: the maximum rank (length) of the ``shape`` vector.
-:backend: the database backend type.
-:version: the |cyclus| version.
-:supported: flag for if the backend supported this type in this release.
+:ID: Enum identifier (value) for database type in the ``cyclus::DbTypes`` enum.
+:Name: Enum name for database type in the ``cyclus::DbTypes`` enum.
+:C++ Type: The corresponding C++ type.
+:Shape Rank: The maximum rank (length) of the ``shape`` vector.
+:Backend: The database backend type.
+:Version: The |cyclus| version.
+:Supported: Flag for if the backend supported this type in this release.
 
 .. raw:: html
 
     <br />
 
-    <link rel="stylesheet" href="../_static/pivot/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pivot/subnav.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pivot/pivot.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pivot/datatables-2.1.6.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/cyclus.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
 
@@ -42,119 +40,48 @@ yet supported, please let us know and we'll get to it as soon as possible!
     </style>
 
     <!-- jquery_pivot must be loaded after pivot.js and jQuery -->
-    <script type="text/javascript" src="../_static/pivot/subnav.js"></script>
-    <script type="text/javascript" src="../_static/pivot/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="../_static/pivot/dataTables.bootstrap.js"></script>
-    <script type="text/javascript" src="../_static/pivot/pivot.min.js"></script>
-    <script type="text/javascript" src="../_static/pivot/jquery_pivot.js"></script>
+    <script type="text/javascript" src="../_static/pivot/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" src="../_static/pivot/datatables-2.1.6.min.js"></script>
 
     <script type="text/javascript">
     var dbdata = []
     $.getJSON("/arche/dbtypes.json", function(json) {
-        dbdata = json;
-
-        function setupPivot(input){
-          input.callbacks = {afterUpdateResults: function(){
-            $('#results > table').dataTable({
-              "sDom": "<'row'<'span6'l><'span6'f>>t<'row'<'span6'i><'span6'p>>",
-              "iDisplayLength": -1,
-              "aLengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]],
-              "sPaginationType": "bootstrap",
-              "oLanguage": {
-                "sLengthMenu": "_MENU_ records per page"
-              }
-            });
-          }};
-          $('#pivot-display').pivot_display('setup', input);
-        };
+        // this mapping is purely for formatting purposes
+        dbdata = json.map(function(row){
+          let formattedRow = [ ...row ]
+          formattedRow[6] = row[6] === 1 ? "True" : "False"; // change supported flag to a string
+          formattedRow[5] = row[5].startsWith('v') ? row[5] : "v" + row[5]; // add a 'v' prefix to the version number if it doesn't exist
+          return formattedRow;
+        });
 
         $(document).ready(function() {
-            fields =[{name: 'id',         type: 'integer', filterable: true},
-                     {name: 'name',       type: 'string',  filterable: true,
-                      displayFunction: function(value){
-                        return '<div style="font-family:Courier,monospace;">' +
-                               value + '</div>';}},
-                     {name: "C++ type",   type: 'string',  filterable: true,
-                      displayFunction: function(value){
-                        return '<div style="font-family:Courier,monospace;">' +
-                               value + '</div>';}},
-                     {name: 'shape rank', type: 'integer', filterable: true},
-                     {name: 'backend',    type: 'string',  filterable: true,
-                      columnLabelable: true},
-                     {name: 'version',    type: 'string',  filterable: true,
-                      columnLabelable: true},
-                     {name: 'supported',  type: 'integer', filterable: true,
-                      rowLabelable: true, summarizable: 'sum',
-                      displayFunction: function(value){
-                        if (value)
-                          return '<div style="text-align:center;' +
-                                 'background-color:#c8e8b0">Yes</div>';
-                        else
-                          return '<div style="text-align:center;' +
-                                 'background-color:#fcf1df">No</div>';
-                        }
-                      }
-                     ];
+            $('#dbtypes-table').DataTable({
+              data: dbdata.slice(1),
+              paging: true,
+              pageLength: 25,
+              scrollX: true,
+              autoWidth: true,
+              order: [
+                { idx: 5, dir: 'desc' }, // sort by version first
+                { idx: 0, dir: 'asc' }, // sort by id
+              ],
+              columns: [
+                { title: "ID", searchable: true },
+                { title: "Name", searchable: true },
+                { title: "C++ Type", searchable: true },
+                { title: "Shape Rank",},
+                { title: "Backend", searchable: true },
+                { title: "Version", searchable: true },
+                { title: "Supported", },
+              ]
+            })
 
-            setupPivot({json: dbdata, fields: fields,
-                        filters: {version: "v1.2"},
-                        rowLabels: ["C++ type"],
-                        columnLabels: ["backend"],
-                        summaries: ["supported_sum"]});
-
-            // prevent dropdown from closing after selection
-            $('.stop-propagation').click(function(event){
-              event.stopPropagation();
-            });
         });
     });
 
     </script>
-    <div class="subnav" style="position:static;">
-      <ul class="nav nav-pills">
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            Filter Fields
-            <b class="caret"></b>
-          </a>
-          <ul class="dropdown-menu stop-propagation" style="overflow:auto;max-height:450px;padding:10px;">
-            <div id="filter-list"></div>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            Row Label Fields
-            <b class="caret"></b>
-          </a>
-          <ul class="dropdown-menu stop-propagation" style="overflow:auto;max-height:450px;padding:10px;">
-            <div id="row-label-fields"></div>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            Column Label Fields
-            <b class="caret"></b>
-          </a>
-          <ul class="dropdown-menu stop-propagation" style="overflow:auto;max-height:450px;padding:10px;">
-            <div id="column-label-fields"></div>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            Summary Fields
-            <b class="caret"></b>
-          </a>
-          <ul class="dropdown-menu stop-propagation" style="overflow:auto;max-height:450px;padding:10px;">
-            <div id="summary-fields"></div>
-          </ul>
-        </li>
-      </ul>
-    </div>
 
-    <div>
-      <br />
-      <span id="pivot-detail"></span>
-      <hr/>
-      <div id="results"></div>
-    </div>
 
+    <table id="dbtypes-table" class="display">
+      <!-- table content will be dynamically populated by the javascript above -->
+    </table>
