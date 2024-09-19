@@ -74,8 +74,10 @@ gh-preview html:
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)."
 
 docker-gh-preview docker-html:
-	docker build -f docker/Dockerfile -t site-deps .
-	docker run -w /cyclus.github.com -v $(PWD):/cyclus.github.com site-deps bash -c "make gh-preview && chmod -R 777 $(BUILDDIR)"
+	docker build --platform linux/amd64 -f docker/Dockerfile -t site-image --build-arg BUILDDIR=$(BUILDDIR) --progress plain .
+	docker create --platform linux/amd64 --name site-container site-image sleep
+	docker cp site-container:/$(BUILDDIR) $(BUILDDIR)
+	docker rm site-container
 
 serve: html
 	cd $(BUILDDIR) && python -m http.server
