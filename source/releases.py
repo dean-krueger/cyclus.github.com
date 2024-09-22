@@ -20,8 +20,9 @@ def main():
         date_formatted = date_object.strftime("%m/%d/%Y")
         zip_url = release['zipball_url']
         tar_url = release['tarball_url']
+        web_url = release['html_url']
         table_text += f'''
-   * - {version}
+   * - `{version} <{web_url}>`
      - {date_formatted} 
      - `zip {version} <{zip_url}>`_
      - `tar {version} <{tar_url}>`_'''
