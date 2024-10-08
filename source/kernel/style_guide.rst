@@ -15,8 +15,8 @@ The definitive documentation of any software is the source code itself.
 |cyclus| will relies on Doxygen for automation of rich documentation from
 appropriately formatted comments in the source code. Current Doxygen 
 documentation can be found online for both `cyclus 
-<http://fuelcycle.org/cyclus/>`_ and `cycamore 
-<http://fuelcycle.org/cycamore/>`_.  These pages will be updated nightly.
+</cyclus/>`_ and `cycamore 
+</cycamore/>`_.  These pages will be updated nightly.
 
 Documentation is a make target in the CMake build system. Documentation
 will automatically be built when you `make all`. You can build only the

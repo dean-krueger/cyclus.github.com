@@ -24,7 +24,7 @@ used to automate the generation of code for the following functions:
     void InitFrom(cyclus::Agent*);
 
 When the preprocessor isn't sufficient, read the `API documents
-<http://fuelcycle.org/cyclus/classcyclus_1_1Agent.html>`_ for the functions
+</cyclus/classcyclus_1_1Agent.html>`_ for the functions
 listed above VERY CAREFULLY. There are also a few other functions related to
 initialization that are important to understand well:
 
