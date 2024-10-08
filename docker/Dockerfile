@@ -9,13 +9,13 @@ RUN make gh-preview
 
 WORKDIR /cyclus/build
 RUN make cyclusdoc && \
-    mkdir -p /cyclus.github.com/${BUILDDIR}/cyclus/api && \
-    cp -r doc/html/* /cyclus.github.com/${BUILDDIR}/cyclus/api/
+    mkdir -p /cyclus.github.com/${BUILDDIR}/cyclus && \
+    cp -r doc/html/* /cyclus.github.com/${BUILDDIR}/cyclus/
 
 WORKDIR /cycamore/build
 RUN make cycamoredoc && \
-    mkdir -p /cyclus.github.com/${BUILDDIR}/cycamore/api && \
-    cp -r doc/html/* /cyclus.github.com/${BUILDDIR}/cycamore/api/
+    mkdir -p /cyclus.github.com/${BUILDDIR}/cycamore && \
+    cp -r doc/html/* /cyclus.github.com/${BUILDDIR}/cycamore/
 
 
 FROM scratch

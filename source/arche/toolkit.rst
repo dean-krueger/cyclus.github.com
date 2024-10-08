@@ -61,7 +61,7 @@ in one of the following ways:
         mybuf = ts.ResBufMaterialInv(capacity='buf_cap')
 
 You can read the `ResBuf API documentation
-<http://fuelcycle.org/cyclus/api/classcyclus_1_1toolkit_1_1ResBuf.html>`_ for
+<http://fuelcycle.org/cyclus/classcyclus_1_1toolkit_1_1ResBuf.html>`_ for
 more details on how to use the buffer.
 
 MatQuery [C++]
